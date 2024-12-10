@@ -3,7 +3,7 @@ import uuid
 
 
 
-class DatedModel(models.Model)
+class DatedModel(models.Model):
   created_at = models.DateTimeField (
     auto_now_add=True,
     editable=False,

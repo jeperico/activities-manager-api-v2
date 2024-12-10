@@ -1,19 +1,46 @@
 from django.db import models
+from utils.models import BaseModel
+import uuid
 
 
-class User(models.Model):
+class User(BaseModel):
+  id = models.uuidField(
+    primary_key=True,
+    default=uuid.uuid4,
+    editable=False,
+  )
   name = models.CharField(
-    max_length=100, help_text='Name of the user', verbose_name='Name'
+    max_length=100,
+    help_text='User name',
+    verbose_name='Name',
   )
-  password = models.CharField(
-    max_length=100, help_text='Password of the user', verbose_name='Password'
+  email = models.EmailField(
+    max_length=100,
+    help_text='User email',
+    verbose_name='Email',
   )
-  created_at = models.DateTimeField(
-    auto_now_add=True, verbose_name='Created At', help_text='Created At'
+  # password = models.CharField(
+  #   max_length=100,
+  #   help_text='User password',
+  #   verbose_name='Password',
+  # )
+
+  def __str__(self):
+    return f"[{self.email}]: {self.name}."
+
+
+class Teacher(BaseModel):
+  user = models.OneToOneField(
+    User,
+    on_delete=models.CASCADE,
+    related_name='teacher',
+    verbose_name='User',
   )
-  updated_at = models.DateTimeField(
-    auto_now=True, verbose_name='Updated At', help_text='Updated At'
+  school = models.CharField(
+    max_length=100,
+    help_text='Teacher school',
+    verbose_name='School',
   )
 
   def __str__(self):
-    return self.name
+    return f"{self.school} ==> [{self.user.email}]: {self.user.name}."
