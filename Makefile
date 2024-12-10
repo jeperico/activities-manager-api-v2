@@ -1,7 +1,7 @@
-docker up:
+dockerup:
 	sudo docker compose -f docker-compose.yml up -d --build
 
-docker down:
+dockerdown:
 	sudo docker compose -f docker-compose.yml down
 
 migrate:

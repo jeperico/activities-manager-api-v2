@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class User(models.Model):
   name = models.CharField(
     max_length=100, help_text='Name of the user', verbose_name='Name'
@@ -14,6 +15,5 @@ class User(models.Model):
     auto_now=True, verbose_name='Updated At', help_text='Updated At'
   )
 
-    def __str__(self):
-      return 
-    self.name
+  def __str__(self):
+    return self.name
