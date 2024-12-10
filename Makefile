@@ -12,3 +12,6 @@ makemigrations:
 
 runserver:
 	python3 app/manage.py runserver
+
+createsuperuser:
+	python3 app/manage.py createsuperuser
