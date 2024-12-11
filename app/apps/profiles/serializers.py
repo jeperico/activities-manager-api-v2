@@ -6,12 +6,6 @@ from django.contrib.auth.password_validation import validate_password
 class UserReadOnlySerializer(serializers.ModelSerializer):
   class Meta:
     model = User
-    fields = ["id", "last_name", "first_name", "email", "created_at", "updated_at"]
-
-
-class UserCompleteReadOnlySerializer(serializers.ModelSerializer):
-  class Meta:
-    model = User
     fields = ["id", "name", "email", "created_at", "updated_at"]
 
 
@@ -24,7 +18,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = User
-    fields = ["id", "last_name", "first_name", "email", "password", "created_at", "updated_at"]
+    fields = ["id", "name", "email", "password", "created_at", "updated_at"]
     extra_kwargs = {
       "password": {"write_only": True},
       "id": {"read_only": True},
@@ -32,18 +26,9 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
   def create(self, validated_data):
     with transaction.atomic():
-      first_name = validated_data.get(
-        "first_name", ""
-      )
-      last_name = validated_data.get(
-        "last_name", ""
-      )
       password = validated_data.pop("password")
       user = User.objects.create(**validated_data)
       user.set_password(password)
-      user.name = (
-        f"{first_name} {last_name}".strip()
-      )
       user.save()
 
       return user

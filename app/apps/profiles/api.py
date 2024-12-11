@@ -1,10 +1,10 @@
 from .models import User, Teacher
-from .serializers import {
-  UserCompleteReadOnlySerializer,
+from .serializers import (
+  UserReadOnlySerializer,
   UserRegisterSerializer,
   TeacherReadOnlySerializer,
   TeacherRegisterSerializer,
-}
+)
 from rest_framework import (
   generics,
   mixins,
@@ -28,7 +28,7 @@ class UserViewSet(
   viewsets.GenericViewSet,
 ):
   queryset = User.objects.all()
-  serializer_class = UserCompleteReadOnlySerializer
+  serializer_class = UserReadOnlySerializer
   filter_backends = [DjangoFilterBackend, filters.SearchFilter]
   search_fields = ['name', 'email']
 
@@ -42,7 +42,7 @@ class UserViewSet(
 
   def retrieve(self, request, *args, **kwargs):
     instance = User.objects.get(id=request.user.id)
-    serializer = UserCompleteReadOnlySerializer(instance)
+    serializer = UserReadOnlySerializer(instance)
     return Response(serializer.data)
 
   def update(self, request, *args, **kwargs):
