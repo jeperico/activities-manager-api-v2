@@ -2,6 +2,7 @@ from .models import User, Teacher
 from rest_framework import serializers
 from django.db import transaction
 from django.contrib.auth.password_validation import validate_password
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 
@@ -67,3 +68,10 @@ class TeacherRegisterSerializer(serializers.ModelSerializer):
       return admin
     else:
       raise serializers.ValidationError(user_serializer.errors)
+
+
+class ProfileTokenObtainPairSerializer(TokenObtainPairSerializer):
+  def validate(self, attrs):
+    data = super().validate(attrs)
+    data["user"] = UserReadOnlySerializer(self.user).data
+    return data

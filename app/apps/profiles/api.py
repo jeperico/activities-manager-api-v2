@@ -4,6 +4,7 @@ from .serializers import (
   UserRegisterSerializer,
   TeacherReadOnlySerializer,
   TeacherRegisterSerializer,
+  ProfileTokenObtainPairSerializer,
 )
 from rest_framework import (
   generics,
@@ -14,6 +15,8 @@ from rest_framework import (
   views,
   viewsets,
 )
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.tokens import BlacklistedToken, OutstandingToken
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
 from rest_framework import filters
@@ -84,3 +87,7 @@ class TeacherRegister(
   def perform_create(self, serializer):
     res = super().perform_create(serializer)
     return res
+
+
+class ProfileTokenObtainPairView(TokenObtainPairView):
+  serializer_class = ProfileTokenObtainPairSerializer
