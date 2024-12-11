@@ -90,3 +90,49 @@ USE_I18N = True
 USE_TZ = True
 STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Activities Manager",
+    "site_header": "Activities Manager",
+    "site_brand": "Activities Manager",
+    "login_logo_dark": None,
+    "site_logo_classes": None,
+    "welcome_sign": "Welcome to Activities Manager",
+    "copyright": "Activities Manager Ltd",
+    "user_avatar": None,
+    "topmenu_links": [
+        {"app": "profiles"},
+    ],
+    "usermenu_links": [{"model": "auth.user"}],
+    "show_sidebar": True,
+    "navigation_expanded": False,
+    "order_with_respect_to": [
+        "profiles",
+        # "reports.report",
+        # "reports.typeofoccurrence",
+        # "reports.signsandsymptoms",
+        # "reports.subsignsandsymptoms",
+        # "reports.subsubsignsandsymptoms",
+        "auth",
+        "auth.user",
+        "auth.group",
+    ],
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "profiles": "fas fa-cogs",
+        "reports.report": "fas fa-file-alt",
+    },
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+    "related_modal_active": False,
+    "use_google_fonts_cdn": True,
+    "show_ui_builder": True,
+    "changeform_format": "horizontal_tabs",
+    "changeform_format_overrides": {
+        "auth.user": "collapsible",
+        "auth.group": "vertical_tabs",
+    },
+    "language_chooser": False,
+}
