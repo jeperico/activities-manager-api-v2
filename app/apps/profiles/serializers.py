@@ -58,7 +58,7 @@ class TeacherReadOnlySerializer(serializers.ModelSerializer):
 
 
 class TeacherRegisterSerializer(serializers.ModelSerializer):
-  user = UserRegisterSerilizer(required=True)
+  user = UserRegisterSerializer(required=True)
 
   class Meta:
     model = Teacher
