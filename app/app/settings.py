@@ -92,6 +92,30 @@ USE_TZ = True
 STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Activities Manager API',
+    'DESCRIPTION': 'API documentation for the Activities Manager project',
+    'VERSION': '2.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SWAGGER_UI_SETTINGS': {
+        'deepLinking': True,
+        'defaultModelRendering': 'model',
+        'defaultModelsExpandDepth': 2,
+        'defaultModelExpandDepth': 2,
+        'docExpansion': 'none',
+        'filter': True,
+        'showExtensions': True,
+        'showCommonExtensions': True,
+    },
+    'REDOC_UI_SETTINGS': {
+        'expandResponses': '200,201',
+        'hideDownloadButton': False,
+        'hideHostname': False,
+        'requiredPropsFirst': True,
+        'sortPropsAlphabetically': True,
+    },
+}
+
 JAZZMIN_SETTINGS = {
     "site_title": "Activities Manager",
     "site_header": "Activities Manager",
