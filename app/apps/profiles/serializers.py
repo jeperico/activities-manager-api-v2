@@ -3,6 +3,8 @@ from rest_framework import serializers
 from django.db import transaction
 from django.contrib.auth.password_validation import validate_password
 
+
+
 class UserReadOnlySerializer(serializers.ModelSerializer):
   class Meta:
     model = User

@@ -3,6 +3,7 @@ from utils.models import BaseModel
 import uuid
 
 
+
 class User(BaseModel):
   id = models.UUIDField(
     primary_key=True,
