@@ -15,3 +15,6 @@ runserver:
 
 createsuperuser:
 	python3 app/manage.py createsuperuser
+
+pyshell:
+	python3 app/manage.py shell

@@ -4,7 +4,7 @@ import uuid
 
 
 class User(BaseModel):
-  id = models.uuidField(
+  id = models.UUIDField(
     primary_key=True,
     default=uuid.uuid4,
     editable=False,
@@ -18,12 +18,8 @@ class User(BaseModel):
     max_length=100,
     help_text='User email',
     verbose_name='Email',
+    unique=True,
   )
-  # password = models.CharField(
-  #   max_length=100,
-  #   help_text='User password',
-  #   verbose_name='Password',
-  # )
 
   def __str__(self):
     return f"[{self.email}]: {self.name}."
