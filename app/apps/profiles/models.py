@@ -1,10 +1,11 @@
 from django.db import models
 from utils.models import BaseModel
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 import uuid
 
 
 
-class User(BaseModel):
+class User(AbstractBaseUser, BaseModel):
   id = models.UUIDField(
     primary_key=True,
     default=uuid.uuid4,
@@ -21,6 +22,9 @@ class User(BaseModel):
     verbose_name='Email',
     unique=True,
   )
+
+  USERNAME_FIELD = 'email'
+  REQUIRED_FIELDS = ['name']
 
   def __str__(self):
     return f"[{self.email}]: {self.name}."

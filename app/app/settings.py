@@ -1,11 +1,13 @@
 from pathlib import Path
-import os
-from dotenv import load_dotenv
-load_dotenv()
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-_4m05(f%b)@^%6b3y7-ow6y*8p9zaaqhktz2u&$g)if%!1z-j3'
+
+CORS_ALLOWED_ORIGINS = config(
+    "DJANGO_CORS_ALLOWED_ORIGINS", default="", cast=lambda v: [s.strip() for s in v.split(",")]
+)
 
 DEBUG = True
 
@@ -20,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "django_filters",
+    "corsheaders",
     'rest_framework',
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
@@ -35,6 +38,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -64,11 +69,11 @@ REST_FRAMEWORK = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DB'),
-        'USER': os.getenv('POSTGRES_USER'),
+        'NAME': config('POSTGRES_DB'),
+        'USER': config('POSTGRES_USER'),
         'HOST': 'localhost',
         'PORT': 5432,
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD')
+        'PASSWORD': config('POSTGRES_PASSWORD')
     }
 }
 

@@ -62,10 +62,8 @@ class TeacherRegisterSerializer(serializers.ModelSerializer):
 
     if user_serializer.is_valid():
       user = user_serializer.save()
-
       teacher = Teacher.objects.create(user=user, **validated_data)
-      
-      return admin
+      return teacher
     else:
       raise serializers.ValidationError(user_serializer.errors)
 
