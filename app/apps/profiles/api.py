@@ -39,9 +39,7 @@ class UserViewSet(
     return self.serializer_class
 
   def get_queryset(self):
-    if self.request.user.is_superuser:
-      return self.queryset
-    return self.queryset.filter(id=self.request.user.id)
+    return self.queryset
 
   def retrieve(self, request, *args, **kwargs):
     instance = User.objects.get(id=request.user.id)
