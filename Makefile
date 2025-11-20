@@ -1,7 +1,7 @@
-docker up:
+dockerup:
 	sudo docker compose -f docker-compose.yml up -d --build
 
-docker down:
+dockerdown:
 	sudo docker compose -f docker-compose.yml down
 
 migrate:
@@ -12,3 +12,9 @@ makemigrations:
 
 runserver:
 	python3 app/manage.py runserver
+
+createsuperuser:
+	python3 app/manage.py createsuperuser
+
+pyshell:
+	python3 app/manage.py shell
